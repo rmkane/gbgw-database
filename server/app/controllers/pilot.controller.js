@@ -1,3 +1,4 @@
+const moment = require('moment');
 const db = require('../models');
 const Pilot = db.pilots;
 const Op = db.Sequelize.Op;
@@ -71,6 +72,7 @@ exports.findAll = (req, res) => {
 // Find a single Pilot with an id
 exports.findOne = (req, res) => {
   const id = req.params.id;
+  console.log('ID:', id);
 
   Pilot.findByPk(id)
     .then(data => {
@@ -148,4 +150,20 @@ exports.deleteAll = (req, res) => {
           err.message || 'Some error occurred while removing all pilots.'
       });
     });
+};
+
+// Latest Pilots within the last week.
+exports.latest = (req, res) => {
+  const condition = { releaseDate: { [Op.gt]: moment().subtract(7, 'days').toDate() } };
+
+  Pilot.findAll({ where: condition })
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message:
+              err.message || 'Some error occurred while retrieving pilots.'
+        });
+      });
 };
