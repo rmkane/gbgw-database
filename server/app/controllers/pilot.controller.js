@@ -2,7 +2,7 @@ const db = require('../models');
 const Pilot = db.pilots;
 const Op = db.Sequelize.Op;
 
-// Create and Save a new Tutorial
+// Create and Save a new Pilot
 exports.create = (req, res) => {
   // Validate request
   if (!req.body.title) {
@@ -12,14 +12,33 @@ exports.create = (req, res) => {
     return;
   }
 
-  // Create a Tutorial
+  // Create a Pilot
   const pilot = {
-    title: req.body.title,
-    description: req.body.description,
-    published: req.body.published ? req.body.published : false
+    name: req.body.name,
+    seriesId: req.body.seriesId,
+    issue: req.body.issue,
+    nameJapanese: req.body.nameJapanese,
+    rarity: req.body.rarity,
+    attributeId: req.body.attributeId,
+    wordTag1Id: req.body.wordTag1Id,
+    wordTag2Id: req.body.wordTag2Id,
+    armor: req.body.armor,
+    meleeAttack: req.body.meleeAttack,
+    shotAttack: req.body.shotAttack,
+    meleeDefense: req.body.meleeDefense,
+    shotDefense: req.body.shotDefense,
+    beamResistance: req.body.beamResistance,
+    physicalResistance: req.body.physicalResistance,
+    trait: req.body.trait,
+    jobLicenseId: req.body.jobLicenseId,
+    aiType1Id: req.body.aiType1Id,
+    aiType2Id: req.body.aiType2Id,
+    obtainedCapsule: req.body.obtainedCapsule,
+    obtainedExchange: req.body.obtainedExchange,
+    releaseDate: req.body.releaseDate
   };
 
-  // Save Tutorial in the database
+  // Save Pilot in the database
   Pilot.create(pilot)
     .then(data => {
       res.send(data);
@@ -32,10 +51,10 @@ exports.create = (req, res) => {
     });
 };
 
-// Retrieve all Tutorials from the database.
+// Retrieve all Pilots from the database.
 exports.findAll = (req, res) => {
   const name = req.query.name;
-  var condition = name ? { name: { [Op.like]: `%${name}%` } } : null;
+  const condition = name ? { name: { [Op.like]: `%${name}%` } } : null;
 
   Pilot.findAll({ where: condition })
     .then(data => {
@@ -127,20 +146,6 @@ exports.deleteAll = (req, res) => {
       res.status(500).send({
         message:
           err.message || 'Some error occurred while removing all pilots.'
-      });
-    });
-};
-
-// find all published Pilot
-exports.findAllPublished = (req, res) => {
-  Pilot.findAll({ where: { published: true } })
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || 'Some error occurred while retrieving pilots.'
       });
     });
 };

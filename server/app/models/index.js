@@ -31,5 +31,6 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.pilots = require('./pilot.model.js')(sequelize, Sequelize);
+db.series = require('./series.model.js')(sequelize, Sequelize);
 
 module.exports = db;
