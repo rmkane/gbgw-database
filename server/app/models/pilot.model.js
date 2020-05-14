@@ -25,8 +25,8 @@ module.exports = (sequelize) => {
     physicalResistance: {type: Sequelize.INTEGER},
     trait: {type: Sequelize.STRING},
     jobLicenseId: {type: Sequelize.INTEGER},
-    aiType1Id: {type: Sequelize.INTEGER, field : 'ai_type_1_id'},
-    aiType2Id: {type: Sequelize.INTEGER, field : 'ai_type_2_id'},
+    aiRangeId: {type: Sequelize.INTEGER},
+    aiPriorityId: {type: Sequelize.INTEGER},
     obtainedCapsule: {type: Sequelize.STRING},
     obtainedExchange: {type: Sequelize.STRING},
     releaseDate: {type: Sequelize.DATE}
