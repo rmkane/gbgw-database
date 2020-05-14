@@ -31,6 +31,7 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.attribute = require('./attribute.model.js')(sequelize);
+db.events = require('./event.model.js')(sequelize);
 db.pilots = require('./pilot.model.js')(sequelize);
 db.series = require('./series.model.js')(sequelize);
 

@@ -32,6 +32,7 @@ app.get('/', (req, res) => {
 
 const routes = [
   'attribute',
+  'event',
   'series',
   'pilot'
 ];
