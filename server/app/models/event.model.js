@@ -11,7 +11,7 @@ module.exports = (sequelize) => {
     name: {type: Sequelize.STRING},
     exchange: {type: Sequelize.STRING},
     blueprints: {type: Sequelize.BOOLEAN},
-    start_date: {type: Sequelize.DATE}
+    startDate: {type: Sequelize.DATE}
   });
 
   return Event;

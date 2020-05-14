@@ -4,6 +4,10 @@ module.exports = app => {
   return routes(app, {
     controller : 'event',
     path: 'events',
-    routes: []
+    routes: [{
+      method: 'get',
+      path: '/latest',
+      callback: 'latest'
+    }]
   });
 };
