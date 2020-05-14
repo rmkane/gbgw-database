@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 
 /**
- * @description A model of the `pilot` table.
+ * @description A model of the `ex_skill` table.
  *
  * @param {Sequelize} sequelize - A sequelize connection factory
  * @returns {Model}

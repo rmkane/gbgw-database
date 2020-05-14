@@ -35,5 +35,6 @@ db.events = require('./event.model.js')(sequelize);
 db.pilots = require('./pilot.model.js')(sequelize);
 db.series = require('./series.model.js')(sequelize);
 db.skills = require('./skill.model.js')(sequelize);
+db.units = require('./unit.model.js')(sequelize);
 
 module.exports = db;

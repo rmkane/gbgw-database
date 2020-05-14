@@ -35,7 +35,8 @@ const routes = [
   'event',
   'pilot',
   'series',
-  'skill'
+  'skill',
+  'unit'
 ];
 routes.forEach(route => require(`./app/routes/${route}.routes`)(app));
 
