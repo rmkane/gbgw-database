@@ -30,9 +30,12 @@ app.get('/', (req, res) => {
   res.json({ message: 'Welcome to the API for GBGW.' });
 });
 
-// Data routes
-require('./app/routes/series.routes')(app);
-require('./app/routes/pilot.routes')(app);
+const routes = [
+  'attribute',
+  'series',
+  'pilot'
+];
+routes.forEach(route => require(`./app/routes/${route}.routes`)(app));
 
 // Set port, listen for requests
 const PORT = process.env.PORT || 8080;

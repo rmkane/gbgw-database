@@ -1,4 +1,12 @@
-module.exports = (sequelize, Sequelize) => {
+const Sequelize = require('sequelize');
+
+/**
+ * @description A model of the `pilot` table.
+ *
+ * @param {Sequelize} sequelize - A sequelize connection factory
+ * @returns {Model}
+ */
+module.exports = (sequelize) => {
   const Pilot = sequelize.define('pilot', {
     name: {type: Sequelize.STRING},
     seriesId: {type: Sequelize.INTEGER},
