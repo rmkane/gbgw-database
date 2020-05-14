@@ -33,6 +33,7 @@ app.get('/', (req, res) => {
 const routes = [
   'attribute',
   'event',
+  'part',
   'pilot',
   'series',
   'skill',
