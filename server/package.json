@@ -1,5 +1,5 @@
 {
-  "name": "server",
+  "name": "gbgw-api-server",
   "version": "1.0.0",
   "description": "Node.js Rest Apis with Express, Sequelize & MySQL",
   "main": "server.js",

@@ -55,9 +55,6 @@ exports.findAll = (req, res) => {
   const name = req.query.name;
   const condition = name ? { name: { [Op.like]: `%${name}%` } } : null;
 
-  console.log('NAME:', name);
-  console.log('COND:', condition);
-
   Part.findAll({ where: condition })
     .then(data => {
       res.send(data);
