@@ -1,7 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const fs = require('fs');
 
+const routeConfig = JSON.parse(fs.readFileSync('./app/routes/route-config.json', 'utf8'));
 const app = express();
 
 const corsOptions = {
@@ -27,19 +29,11 @@ db.sequelize.sync();
 
 // Simple route
 app.get('/', (req, res) => {
-  res.json({ message: 'Welcome to the API for GBGW.' });
+  res.json({ message: 'Welcome to the unofficial API for Gunpla Battle: Gunpla Warfare.' });
 });
 
-const routes = [
-  'attribute',
-  'event',
-  'part',
-  'pilot',
-  'series',
-  'skill',
-  'unit'
-];
-routes.forEach(route => require(`./app/routes/${route}.routes`)(app));
+// Load the routes
+routeConfig.forEach(route => require(`./app/routes/${route}.routes`)(app));
 
 // Set port, listen for requests
 const PORT = process.env.PORT || 8080;
