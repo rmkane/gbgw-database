@@ -2,8 +2,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const fs = require('fs');
+const glob = require('glob');
+const path = require('path');
 
-const routeConfig = JSON.parse(fs.readFileSync('./app/routes/route-config.json', 'utf8'));
+// Load a JSON config:
+// const config = JSON.parse(fs.readFileSync('./app/routes/config.json', 'utf8'));
+
 const app = express();
 
 const corsOptions = {
@@ -32,8 +36,13 @@ app.get('/', (req, res) => {
   res.json({ message: 'Welcome to the unofficial API for Gunpla Battle: Gunpla Warfare.' });
 });
 
-// Load the routes
-routeConfig.forEach(route => require(`./app/routes/${route}.routes`)(app));
+// Load all the routes in the route directory - https://stackoverflow.com/a/28976201/1762224
+glob.sync('./app/routes/*.routes.js').forEach(file => {
+  const filename = path.resolve(file);
+  if (!filename.includes('abstract')) {
+    require(filename)(app);
+  }
+});
 
 // Set port, listen for requests
 const PORT = process.env.PORT || 8080;

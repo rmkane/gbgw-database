@@ -1,6 +1,6 @@
 const moment = require('moment');
 const db = require('../models');
-const Pilot = db.pilots;
+const Pilot = db.pilot;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Pilot

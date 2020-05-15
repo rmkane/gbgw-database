@@ -1,6 +1,6 @@
 const moment = require('moment');
 const db = require('../models');
-const Event = db.events;
+const Event = db.event;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Event

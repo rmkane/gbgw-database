@@ -1,5 +1,5 @@
 const db = require('../models');
-const Part = db.parts;
+const Part = db.part;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Part

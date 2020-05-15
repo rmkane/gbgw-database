@@ -1,6 +1,6 @@
 const moment = require('moment');
 const db = require('../models');
-const Unit = db.units;
+const Unit = db.unit;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Unit

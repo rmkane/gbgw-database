@@ -1,3 +1,6 @@
+const glob = require('glob');
+const path = require('path');
+
 const dbConfig = require('../config/db.config.js');
 
 const Sequelize = require('sequelize');
@@ -30,12 +33,11 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.attribute = require('./attribute.model.js')(sequelize);
-db.events = require('./event.model.js')(sequelize);
-db.parts = require('./part.model.js')(sequelize);
-db.pilots = require('./pilot.model.js')(sequelize);
-db.series = require('./series.model.js')(sequelize);
-db.skills = require('./skill.model.js')(sequelize);
-db.units = require('./unit.model.js')(sequelize);
+// Load all the models in this directory - https://stackoverflow.com/a/28976201/1762224
+glob.sync('./app/models/*.model.js').forEach(file => {
+  const filename = path.resolve(file);
+  const table = path.basename(filename).replace(/\.model\.js/, '');
+  db[table] = require(filename)(sequelize);
+});
 
 module.exports = db;

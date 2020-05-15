@@ -1,5 +1,5 @@
 const db = require('../models');
-const Skill = db.skills;
+const Skill = db.skill;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Skill
