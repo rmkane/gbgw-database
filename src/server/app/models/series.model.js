@@ -1,6 +1,4 @@
 const { DataTypes, Sequelize } = require('sequelize');
-const Pilot = require('./pilot.model');
-const Unit = require('./unit.model');
 
 /**
  * @description A model of the `series` table.
@@ -8,14 +6,24 @@ const Unit = require('./unit.model');
  * @param {Sequelize} sequelize - A sequelize connection factory
  * @returns {Model}
  */
-module.exports = (sequelize) => {
+module.exports = function(sequelize) {
   const Series = sequelize.define('series', {
-    title: {type: DataTypes.STRING},
-    alternate: {type: DataTypes.STRING}
+    id: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      primaryKey: true
+    },
+    title: {
+      type: DataTypes.STRING(128),
+      allowNull: false
+    },
+    alternate: {
+      type: DataTypes.STRING(64),
+      allowNull: true
+    }
+  }, {
+    tableName: 'series'
   });
-
-  //Series.hasMany(Pilot);
-  //Series.hasMany(Unit);
 
   return Series;
 };

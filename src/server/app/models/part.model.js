@@ -1,40 +1,143 @@
 const { DataTypes, Sequelize } = require('sequelize');
-const Skill = require('./skill.model');
-const Unit = require('./unit.model');
 
 /**
- * @description A model of the part: {type: DataTypes.STRING},
+ * @description A model of the `part` table.
  *
  * @param {Sequelize} sequelize - A sequelize connection factory
  * @returns {Model}
  */
-module.exports = (sequelize) => {
+module.exports = function(sequelize) {
   const Part = sequelize.define('part', {
-    name: {type: DataTypes.STRING},
-    collectionId: {type: DataTypes.STRING},
-    unitId: {type: DataTypes.INTEGER},
-    partTypeId: {type: DataTypes.INTEGER},
-    partAugmentTypeId: {type: DataTypes.INTEGER},
-    rarity: {type: DataTypes.INTEGER},
-    attributeId: {type: DataTypes.INTEGER},
-    wordTag1Id: {type: DataTypes.INTEGER, field : 'word_tag_1_id'},
-    wordTag2Id: {type: DataTypes.INTEGER, field : 'word_tag_2_id'},
-    armor: {type: DataTypes.INTEGER},
-    meleeAttack: {type: DataTypes.INTEGER},
-    shotAttack: {type: DataTypes.INTEGER},
-    meleeDefense: {type: DataTypes.INTEGER},
-    shotDefense: {type: DataTypes.INTEGER},
-    beamResistance: {type: DataTypes.INTEGER},
-    physicalResistance: {type: DataTypes.INTEGER},
-    exSkillId: {type: DataTypes.INTEGER},
-    trait: {type: DataTypes.STRING},
-    weaponTypeId: {type: DataTypes.INTEGER},
-    weaponCategoryId: {type: DataTypes.INTEGER},
-    notes: {type: DataTypes.STRING}
+    id: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      primaryKey: true
+    },
+    name: {
+      type: DataTypes.STRING(128),
+      allowNull: false
+    },
+    collectionId: {
+      type: DataTypes.STRING(16),
+      allowNull: true
+    },
+    unitId: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true,
+      references: {
+        model: 'unit',
+        key: 'id'
+      }
+    },
+    partTypeId: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      references: {
+        model: 'part_type',
+        key: 'id'
+      }
+    },
+    partAugmentTypeId: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true,
+      references: {
+        model: 'part_type',
+        key: 'id'
+      }
+    },
+    rarity: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false
+    },
+    attributeId: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      references: {
+        model: 'attribute',
+        key: 'id'
+      }
+    },
+    wordTag1Id: {
+      type: DataTypes.INTEGER(11),
+      field : 'word_tag_1_id',
+      allowNull: false,
+      references: {
+        model: 'word_tag',
+        key: 'id'
+      }
+    },
+    wordTag2Id: {
+      type: DataTypes.INTEGER(11),
+      field : 'word_tag_2_id',
+      allowNull: false,
+      references: {
+        model: 'word_tag',
+        key: 'id'
+      }
+    },
+    armor: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false
+    },
+    meleeAttack: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false
+    },
+    shotAttack: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false
+    },
+    meleeDefense: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false
+    },
+    shotDefense: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false
+    },
+    beamResistance: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false
+    },
+    physicalResistance: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false
+    },
+    exSkillId: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true,
+      references: {
+        model: 'ex_skill',
+        key: 'id'
+      }
+    },
+    trait: {
+      type: DataTypes.STRING(1024),
+      allowNull: true
+    },
+    weaponTypeId: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true,
+      references: {
+        model: 'weapon_type',
+        key: 'id'
+      }
+    },
+    weaponCategoryId: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true,
+      references: {
+        model: 'weapon_category',
+        key: 'id'
+      }
+    },
+    notes: {
+      type: DataTypes.STRING(512),
+      allowNull: true
+    }
+  }, {
+    tableName: 'part'
   });
-
-  //Part.belongsTo(Unit);
-  //Part.hasOne(Skill);
 
   return Part;
 };

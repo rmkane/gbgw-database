@@ -6,9 +6,19 @@ const { DataTypes, Sequelize } = require('sequelize');
  * @param {Sequelize} sequelize - A sequelize connection factory
  * @returns {Model}
  */
-module.exports = (sequelize) => {
+module.exports = function(sequelize) {
   const Attribute = sequelize.define('attribute', {
-    name: {type: DataTypes.STRING}
+    id: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      primaryKey: true
+    },
+    name: {
+      type: DataTypes.STRING(16),
+      allowNull: false
+    }
+  }, {
+    tableName: 'attribute'
   });
 
   return Attribute;

@@ -1,6 +1,12 @@
-/* jshint indent: 2 */
+const { DataTypes, Sequelize } = require('sequelize');
 
-module.exports = function(sequelize, DataTypes) {
+/**
+ * @description A model of the `word_tag` table.
+ *
+ * @param {Sequelize} sequelize - A sequelize connection factory
+ * @returns {Model}
+ */
+module.exports = function(sequelize) {
   const WordTag = sequelize.define('word_tag', {
     id: {
       type: DataTypes.INTEGER(11),

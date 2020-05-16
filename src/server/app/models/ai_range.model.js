@@ -1,6 +1,12 @@
-/* jshint indent: 2 */
+const { DataTypes, Sequelize } = require('sequelize');
 
-module.exports = function(sequelize, DataTypes) {
+/**
+ * @description A model of the `ai_range` table.
+ *
+ * @param {Sequelize} sequelize - A sequelize connection factory
+ * @returns {Model}
+ */
+module.exports = function(sequelize) {
   const AiRange = sequelize.define('ai_range', {
     id: {
       type: DataTypes.INTEGER(11),

@@ -1,6 +1,4 @@
 const { DataTypes, Sequelize } = require('sequelize');
-const Part = require('./part.model');
-const Series = require('./pilot.model');
 
 /**
  * @description A model of the `unit` table.
@@ -8,26 +6,80 @@ const Series = require('./pilot.model');
  * @param {Sequelize} sequelize - A sequelize connection factory
  * @returns {Model}
  */
-module.exports = (sequelize) => {
+module.exports = function(sequelize) {
   const Unit = sequelize.define('unit', {
-    model: {type: DataTypes.STRING},
-    name: {type: DataTypes.STRING},
-    subname: {type: DataTypes.STRING},
-    seriesId: {type: DataTypes.INTEGER},
-    issue: {type: DataTypes.INTEGER},
-    nameJapanese: {type: DataTypes.STRING},
-    rarity: {type: DataTypes.INTEGER},
-    attributeId: {type: DataTypes.INTEGER},
-    marks: {type: DataTypes.INTEGER},
-    obtainedCapsule: {type: DataTypes.STRING},
-    obtainedExchange: {type: DataTypes.STRING},
-    obtainedBanner: {type: DataTypes.STRING},
-    obtainedSokai: {type: DataTypes.BOOLEAN},
-    releaseDate: {type: DataTypes.DATE}
+    id: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      primaryKey: true
+    },
+    model: {
+      type: DataTypes.STRING(64),
+      allowNull: true
+    },
+    name: {
+      type: DataTypes.STRING(128),
+      allowNull: false
+    },
+    subname: {
+      type: DataTypes.STRING(64),
+      allowNull: true
+    },
+    seriesId: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      references: {
+        model: 'series',
+        key: 'id'
+      }
+    },
+    issue: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true
+    },
+    nameJapanese: {
+      type: DataTypes.STRING(64),
+      allowNull: true
+    },
+    rarity: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true
+    },
+    attributeId: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true,
+      references: {
+        model: 'attribute',
+        key: 'id'
+      }
+    },
+    marks: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true
+    },
+    obtainedCapsule: {
+      type: DataTypes.STRING(64),
+      allowNull: true
+    },
+    obtainedExchange: {
+      type: DataTypes.STRING(64),
+      allowNull: true
+    },
+    obtainedBanner: {
+      type: DataTypes.STRING(64),
+      allowNull: true
+    },
+    obtainedSokai: {
+      type: DataTypes.INTEGER(1),
+      allowNull: false
+    },
+    releaseDate: {
+      type: DataTypes.DATEONLY,
+      allowNull: true
+    }
+  }, {
+    tableName: 'unit'
   });
-
-  //Unit.belongsTo(Series);
-  //Unit.hasMany(Part);
 
   return Unit;
 };

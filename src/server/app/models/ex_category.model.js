@@ -1,6 +1,12 @@
-/* jshint indent: 2 */
+const { DataTypes, Sequelize } = require('sequelize');
 
-module.exports = function(sequelize, DataTypes) {
+/**
+ * @description A model of the `ex_category` table.
+ *
+ * @param {Sequelize} sequelize - A sequelize connection factory
+ * @returns {Model}
+ */
+module.exports = function(sequelize) {
   const ExCategory = sequelize.define('ex_category', {
     id: {
       type: DataTypes.INTEGER(11),

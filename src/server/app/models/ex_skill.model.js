@@ -1,6 +1,12 @@
-/* jshint indent: 2 */
+const { DataTypes, Sequelize } = require('sequelize');
 
-module.exports = function(sequelize, DataTypes) {
+/**
+ * @description A model of the `ex_skill` table.
+ *
+ * @param {Sequelize} sequelize - A sequelize connection factory
+ * @returns {Model}
+ */
+module.exports = function(sequelize) {
   const ExSkill = sequelize.define('ex_skill', {
     id: {
       type: DataTypes.INTEGER(11),
@@ -15,7 +21,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(256),
       allowNull: false
     },
-    ex_category_id: {
+    exCategoryId: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       references: {
@@ -43,7 +49,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER(11),
       allowNull: false
     },
-    cooldown_initial: {
+    cooldownInitial: {
       type: DataTypes.INTEGER(11),
       allowNull: false
     }
