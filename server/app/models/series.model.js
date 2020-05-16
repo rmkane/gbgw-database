@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize');
+const { DataTypes, Sequelize } = require('sequelize');
 
 /**
  * @description A model of the `series` table.
@@ -8,8 +8,8 @@ const Sequelize = require('sequelize');
  */
 module.exports = (sequelize) => {
   const Series = sequelize.define('series', {
-    title: {type: Sequelize.STRING},
-    alternate: {type: Sequelize.STRING}
+    title: {type: DataTypes.STRING},
+    alternate: {type: DataTypes.STRING}
   });
 
   return Series;

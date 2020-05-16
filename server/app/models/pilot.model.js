@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize');
+const { DataTypes, Sequelize } = require('sequelize');
 
 /**
  * @description A model of the `pilot` table.
@@ -8,28 +8,28 @@ const Sequelize = require('sequelize');
  */
 module.exports = (sequelize) => {
   const Pilot = sequelize.define('pilot', {
-    name: {type: Sequelize.STRING},
-    seriesId: {type: Sequelize.INTEGER},
-    issue: {type: Sequelize.INTEGER},
-    nameJapanese: {type: Sequelize.STRING},
-    rarity: {type: Sequelize.INTEGER},
-    attributeId: {type: Sequelize.INTEGER},
-    wordTag1Id: {type: Sequelize.INTEGER, field : 'word_tag_1_id'},
-    wordTag2Id: {type: Sequelize.INTEGER, field : 'word_tag_2_id'},
-    armor: {type: Sequelize.INTEGER},
-    meleeAttack: {type: Sequelize.INTEGER},
-    shotAttack: {type: Sequelize.INTEGER},
-    meleeDefense: {type: Sequelize.INTEGER},
-    shotDefense: {type: Sequelize.INTEGER},
-    beamResistance: {type: Sequelize.INTEGER},
-    physicalResistance: {type: Sequelize.INTEGER},
-    trait: {type: Sequelize.STRING},
-    jobLicenseId: {type: Sequelize.INTEGER},
-    aiRangeId: {type: Sequelize.INTEGER},
-    aiPriorityId: {type: Sequelize.INTEGER},
-    obtainedCapsule: {type: Sequelize.STRING},
-    obtainedExchange: {type: Sequelize.STRING},
-    releaseDate: {type: Sequelize.DATE}
+    name: {type: DataTypes.STRING},
+    seriesId: {type: DataTypes.INTEGER},
+    issue: {type: DataTypes.INTEGER},
+    nameJapanese: {type: DataTypes.STRING},
+    rarity: {type: DataTypes.INTEGER},
+    attributeId: {type: DataTypes.INTEGER},
+    wordTag1Id: {type: DataTypes.INTEGER, field : 'word_tag_1_id'},
+    wordTag2Id: {type: DataTypes.INTEGER, field : 'word_tag_2_id'},
+    armor: {type: DataTypes.INTEGER},
+    meleeAttack: {type: DataTypes.INTEGER},
+    shotAttack: {type: DataTypes.INTEGER},
+    meleeDefense: {type: DataTypes.INTEGER},
+    shotDefense: {type: DataTypes.INTEGER},
+    beamResistance: {type: DataTypes.INTEGER},
+    physicalResistance: {type: DataTypes.INTEGER},
+    trait: {type: DataTypes.STRING},
+    jobLicenseId: {type: DataTypes.INTEGER},
+    aiRangeId: {type: DataTypes.INTEGER},
+    aiPriorityId: {type: DataTypes.INTEGER},
+    obtainedCapsule: {type: DataTypes.STRING},
+    obtainedExchange: {type: DataTypes.STRING},
+    releaseDate: {type: DataTypes.DATE}
   });
 
   return Pilot;

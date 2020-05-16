@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize');
+const { DataTypes, Sequelize } = require('sequelize');
 
 /**
  * @description A model of the `attribute` table.
@@ -8,7 +8,7 @@ const Sequelize = require('sequelize');
  */
 module.exports = (sequelize) => {
   const Attribute = sequelize.define('attribute', {
-    name: {type: Sequelize.STRING}
+    name: {type: DataTypes.STRING}
   });
 
   return Attribute;

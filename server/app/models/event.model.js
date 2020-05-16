@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize');
+const { DataTypes, Sequelize } = require('sequelize');
 
 /**
  * @description A model of the `event` table.
@@ -8,10 +8,10 @@ const Sequelize = require('sequelize');
  */
 module.exports = (sequelize) => {
   const Event = sequelize.define('event', {
-    name: {type: Sequelize.STRING},
-    exchange: {type: Sequelize.STRING},
-    blueprints: {type: Sequelize.BOOLEAN},
-    startDate: {type: Sequelize.DATE}
+    name: {type: DataTypes.STRING},
+    exchange: {type: DataTypes.STRING},
+    blueprints: {type: DataTypes.BOOLEAN},
+    startDate: {type: DataTypes.DATE}
   });
 
   return Event;

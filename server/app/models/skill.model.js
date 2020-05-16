@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize');
+const { DataTypes, Sequelize } = require('sequelize');
 
 /**
  * @description A model of the `ex_skill` table.
@@ -8,15 +8,15 @@ const Sequelize = require('sequelize');
  */
 module.exports = (sequelize) => {
   const Skill = sequelize.define('ex_skill', {
-    name: {type: Sequelize.STRING},
-    description: {type: Sequelize.STRING},
-    exCategoryId: {type: Sequelize.INTEGER},
-    pierce: {type: Sequelize.STRING},
-    power: {type: Sequelize.STRING},
-    duration: {type: Sequelize.INTEGER},
-    magazine: {type: Sequelize.INTEGER},
-    cooldown: {type: Sequelize.INTEGER},
-    cooldownInitial: {type: Sequelize.INTEGER}
+    name: {type: DataTypes.STRING},
+    description: {type: DataTypes.STRING},
+    exCategoryId: {type: DataTypes.INTEGER},
+    pierce: {type: DataTypes.STRING},
+    power: {type: DataTypes.STRING},
+    duration: {type: DataTypes.INTEGER},
+    magazine: {type: DataTypes.INTEGER},
+    cooldown: {type: DataTypes.INTEGER},
+    cooldownInitial: {type: DataTypes.INTEGER}
   });
 
   return Skill;
