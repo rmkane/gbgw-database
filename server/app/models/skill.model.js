@@ -1,4 +1,5 @@
 const { DataTypes, Sequelize } = require('sequelize');
+const Part = require('./part.model');
 
 /**
  * @description A model of the `ex_skill` table.

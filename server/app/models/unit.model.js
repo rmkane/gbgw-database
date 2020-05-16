@@ -1,4 +1,6 @@
 const { DataTypes, Sequelize } = require('sequelize');
+const Part = require('./part.model');
+const Series = require('./pilot.model');
 
 /**
  * @description A model of the `unit` table.
@@ -7,7 +9,7 @@ const { DataTypes, Sequelize } = require('sequelize');
  * @returns {Model}
  */
 module.exports = (sequelize) => {
-  const Event = sequelize.define('unit', {
+  const Unit = sequelize.define('unit', {
     model: {type: DataTypes.STRING},
     name: {type: DataTypes.STRING},
     subname: {type: DataTypes.STRING},
@@ -24,5 +26,8 @@ module.exports = (sequelize) => {
     releaseDate: {type: DataTypes.DATE}
   });
 
-  return Event;
+  //Unit.belongsTo(Series);
+  //Unit.hasMany(Part);
+
+  return Unit;
 };

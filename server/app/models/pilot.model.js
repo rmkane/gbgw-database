@@ -1,4 +1,5 @@
 const { DataTypes, Sequelize } = require('sequelize');
+const Series = require('./series.model');
 
 /**
  * @description A model of the `pilot` table.
@@ -31,6 +32,8 @@ module.exports = (sequelize) => {
     obtainedExchange: {type: DataTypes.STRING},
     releaseDate: {type: DataTypes.DATE}
   });
+
+  //Pilot.belongsTo(Series);
 
   return Pilot;
 };

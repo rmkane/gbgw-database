@@ -1,4 +1,6 @@
 const { DataTypes, Sequelize } = require('sequelize');
+const Skill = require('./skill.model');
+const Unit = require('./unit.model');
 
 /**
  * @description A model of the part: {type: DataTypes.STRING},
@@ -30,6 +32,9 @@ module.exports = (sequelize) => {
     weaponCategoryId: {type: DataTypes.INTEGER},
     notes: {type: DataTypes.STRING}
   });
+
+  //Part.belongsTo(Unit);
+  //Part.hasOne(Skill);
 
   return Part;
 };
