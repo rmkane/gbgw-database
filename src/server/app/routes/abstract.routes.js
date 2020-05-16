@@ -7,7 +7,7 @@
  * @param {string} options.path - The base path for the route
  * @param {Object[]} options.routes - Additional routes for specialized controller methods
  */
-module.exports = (app, options={}) => {
+module.exports = (app, options = {}) => {
   const router = require('express').Router();
   const controller = require(`../controllers/${options.controller}.controller.js`);
 
@@ -36,14 +36,22 @@ module.exports = (app, options={}) => {
    */
 
   // Create a new table entry
-  if (controller.create) router.post('/', controller.create);
+  if (controller.create) {
+    router.post('/', controller.create);
+  }
 
   // Update an entry with id
-  if (controller.update) router.put('/:id', controller.update);
+  if (controller.update) {
+    router.put('/:id', controller.update);
+  }
 
   // Delete an entry with id
-  if (controller.delete) router.delete('/:id', controller.delete);
+  if (controller.delete) {
+    router.delete('/:id', controller.delete);
+  }
 
   // Delete all entries
-  if (controller.deleteAll) router.delete('/', controller.deleteAll);
+  if (controller.deleteAll) {
+    router.delete('/', controller.deleteAll);
+  }
 };
