@@ -1,27 +1,26 @@
 import React, { Component } from "react";
-import TutorialDataService from "../services/tutorial.service";
+import PilotDataService from "../services/pilot.service";
 
-export default class AddTutorial extends Component {
+export default class AddPilot extends Component {
   constructor(props) {
     super(props);
-    this.onChangeTitle = this.onChangeTitle.bind(this);
+    this.onChangeName = this.onChangeName.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
-    this.saveTutorial = this.saveTutorial.bind(this);
-    this.newTutorial = this.newTutorial.bind(this);
+    this.savePilot = this.savePilot.bind(this);
+    this.newPilot = this.newPilot.bind(this);
 
     this.state = {
       id: null,
-      title: "",
+      name: "",
       description: "", 
       published: false,
-
       submitted: false
     };
   }
 
-  onChangeTitle(e) {
+  onChangeName(e) {
     this.setState({
-      title: e.target.value
+      name: e.target.value
     });
   }
 
@@ -31,17 +30,17 @@ export default class AddTutorial extends Component {
     });
   }
 
-  saveTutorial() {
+  savePilot() {
     var data = {
-      title: this.state.title,
+      name: this.state.name,
       description: this.state.description
     };
 
-    TutorialDataService.create(data)
+    PilotDataService.create(data)
       .then(response => {
         this.setState({
           id: response.data.id,
-          title: response.data.title,
+          name: response.data.name,
           description: response.data.description,
           published: response.data.published,
 
@@ -54,13 +53,12 @@ export default class AddTutorial extends Component {
       });
   }
 
-  newTutorial() {
+  newPilot() {
     this.setState({
       id: null,
-      title: "",
+      name: "",
       description: "",
       published: false,
-
       submitted: false
     });
   }
@@ -71,22 +69,22 @@ export default class AddTutorial extends Component {
         {this.state.submitted ? (
           <div>
             <h4>You submitted successfully!</h4>
-            <button className="btn btn-success" onClick={this.newTutorial}>
+            <button className="btn btn-success" onClick={this.newPilot}>
               Add
             </button>
           </div>
         ) : (
           <div>
             <div className="form-group">
-              <label htmlFor="title">Title</label>
+              <label htmlFor="name">Name</label>
               <input
                 type="text"
                 className="form-control"
-                id="title"
+                id="name"
                 required
-                value={this.state.title}
-                onChange={this.onChangeTitle}
-                name="title"
+                value={this.state.name}
+                onChange={this.onChangeName}
+                name="name"
               />
             </div>
 
@@ -103,7 +101,7 @@ export default class AddTutorial extends Component {
               />
             </div>
 
-            <button onClick={this.saveTutorial} className="btn btn-success">
+            <button onClick={this.savePilot} className="btn btn-success">
               Submit
             </button>
           </div>

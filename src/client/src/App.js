@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-import AddTutorial from "./components/add-tutorial.component";
-import Tutorial from "./components/tutorial.component";
-import TutorialsList from "./components/tutorials-list.component";
+import AddPilot from "./components/add-pilot.component";
+import Pilot from "./components/pilot.component";
+import PilotList from "./components/pilot-list.component";
 
 class App extends Component {
   render() {
@@ -13,13 +13,13 @@ class App extends Component {
       <Router>
         <div>
           <nav className="navbar navbar-expand navbar-dark bg-dark">
-            <a href="/tutorials" className="navbar-brand">
-              bezKoder
+            <a href="/pilots" className="navbar-brand">
+              GBGW API
             </a>
             <div className="navbar-nav mr-auto">
               <li className="nav-item">
-                <Link to={"/tutorials"} className="nav-link">
-                  Tutorials
+                <Link to={"/pilots"} className="nav-link">
+                  Pilots
                 </Link>
               </li>
               <li className="nav-item">
@@ -32,9 +32,9 @@ class App extends Component {
 
           <div className="container mt-3">
             <Switch>
-              <Route exact path={["/", "/tutorials"]} component={TutorialsList} />
-              <Route exact path="/add" component={AddTutorial} />
-              <Route path="/tutorials/:id" component={Tutorial} />
+              <Route exact path={["/", "/pilots"]} component={PilotList} />
+              <Route exact path="/add" component={AddPilot} />
+              <Route path="/pilots/:id" component={Pilot} />
             </Switch>
           </div>
         </div>

@@ -1,3 +1,6 @@
+/**
+ * Adapted from: https://stackoverflow.com/a/31774097/1762224
+ */
 const fs = require('fs');
 const resolve = require('path').resolve;
 const join = require('path').join;

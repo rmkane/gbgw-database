@@ -1,42 +1,42 @@
 import React, { Component } from "react";
-import TutorialDataService from "../services/tutorial.service";
+import PilotDataService from "../services/pilot.service";
 import { Link } from "react-router-dom";
 
-export default class TutorialsList extends Component {
+export default class PilotList extends Component {
   constructor(props) {
     super(props);
-    this.onChangeSearchTitle = this.onChangeSearchTitle.bind(this);
-    this.retrieveTutorials = this.retrieveTutorials.bind(this);
+    this.onChangeSearchName = this.onChangeSearchName.bind(this);
+    this.retrievePilots = this.retrievePilots.bind(this);
     this.refreshList = this.refreshList.bind(this);
-    this.setActiveTutorial = this.setActiveTutorial.bind(this);
-    this.removeAllTutorials = this.removeAllTutorials.bind(this);
-    this.searchTitle = this.searchTitle.bind(this);
+    this.setActivePilot = this.setActivePilot.bind(this);
+    this.removeAllPilots = this.removeAllPilots.bind(this);
+    this.searchName = this.searchName.bind(this);
 
     this.state = {
-      tutorials: [],
-      currentTutorial: null,
+      pilots: [],
+      currentPilot: null,
       currentIndex: -1,
-      searchTitle: ""
+      searchName: ""
     };
   }
 
   componentDidMount() {
-    this.retrieveTutorials();
+    this.retrievePilots();
   }
 
-  onChangeSearchTitle(e) {
-    const searchTitle = e.target.value;
+  onChangeSearchName(e) {
+    const searchName = e.target.value;
 
     this.setState({
-      searchTitle: searchTitle
+      searchName: searchName
     });
   }
 
-  retrieveTutorials() {
-    TutorialDataService.getAll()
+  retrievePilots() {
+    PilotDataService.getAll()
       .then(response => {
         this.setState({
-          tutorials: response.data
+          pilots: response.data
         });
         console.log(response.data);
       })
@@ -46,22 +46,22 @@ export default class TutorialsList extends Component {
   }
 
   refreshList() {
-    this.retrieveTutorials();
+    this.retrievePilots();
     this.setState({
-      currentTutorial: null,
+      currentPilot: null,
       currentIndex: -1
     });
   }
 
-  setActiveTutorial(tutorial, index) {
+  setActivePilot(pilot, index) {
     this.setState({
-      currentTutorial: tutorial,
+      currentPilot: pilot,
       currentIndex: index
     });
   }
 
-  removeAllTutorials() {
-    TutorialDataService.deleteAll()
+  removeAllPilots() {
+    PilotDataService.deleteAll()
       .then(response => {
         console.log(response.data);
         this.refreshList();
@@ -71,11 +71,11 @@ export default class TutorialsList extends Component {
       });
   }
 
-  searchTitle() {
-    TutorialDataService.findByTitle(this.state.searchTitle)
+  searchName() {
+    PilotDataService.findByName(this.state.searchName)
       .then(response => {
         this.setState({
-          tutorials: response.data
+          pilots: response.data
         });
         console.log(response.data);
       })
@@ -85,7 +85,7 @@ export default class TutorialsList extends Component {
   }
 
   render() {
-    const { searchTitle, tutorials, currentTutorial, currentIndex } = this.state;
+    const { searchPilot, pilots, currentPilot: currentPilot, currentIndex } = this.state;
 
     return (
       <div className="list row">
@@ -94,15 +94,15 @@ export default class TutorialsList extends Component {
             <input
               type="text"
               className="form-control"
-              placeholder="Search by title"
-              value={searchTitle}
-              onChange={this.onChangeSearchTitle}
+              placeholder="Search by name"
+              value={searchPilot}
+              onChange={this.onChangeSearchName}
             />
             <div className="input-group-append">
               <button
                 className="btn btn-outline-secondary"
                 type="button"
-                onClick={this.searchTitle}
+                onClick={this.searchName}
               >
                 Search
               </button>
@@ -110,56 +110,56 @@ export default class TutorialsList extends Component {
           </div>
         </div>
         <div className="col-md-6">
-          <h4>Tutorials List</h4>
+          <h4>Pilots List</h4>
 
           <ul className="list-group">
-            {tutorials &&
-              tutorials.map((tutorial, index) => (
+            {pilots &&
+              pilots.map((pilot, index) => (
                 <li
                   className={
                     "list-group-item " +
                     (index === currentIndex ? "active" : "")
                   }
-                  onClick={() => this.setActiveTutorial(tutorial, index)}
+                  onClick={() => this.setActivePilot(pilot, index)}
                   key={index}
                 >
-                  {tutorial.title}
+                  {pilot.name}
                 </li>
               ))}
           </ul>
 
           <button
             className="m-3 btn btn-sm btn-danger"
-            onClick={this.removeAllTutorials}
+            onClick={this.removeAllPilots}
           >
             Remove All
           </button>
         </div>
         <div className="col-md-6">
-          {currentTutorial ? (
+          {currentPilot ? (
             <div>
-              <h4>Tutorial</h4>
+              <h4>Pilot</h4>
               <div>
                 <label>
-                  <strong>Title:</strong>
+                  <strong>Name:</strong>
                 </label>{" "}
-                {currentTutorial.title}
+                {currentPilot.name}
               </div>
               <div>
                 <label>
                   <strong>Description:</strong>
                 </label>{" "}
-                {currentTutorial.description}
+                {currentPilot.description}
               </div>
               <div>
                 <label>
                   <strong>Status:</strong>
                 </label>{" "}
-                {currentTutorial.published ? "Published" : "Pending"}
+                {currentPilot.published ? "Published" : "Pending"}
               </div>
 
               <Link
-                to={"/tutorials/" + currentTutorial.id}
+                to={"/pilots/" + currentPilot.id}
                 className="badge badge-warning"
               >
                 Edit
@@ -168,7 +168,7 @@ export default class TutorialsList extends Component {
           ) : (
             <div>
               <br />
-              <p>Please click on a Tutorial...</p>
+              <p>Please click on a Pilot...</p>
             </div>
           )}
         </div>

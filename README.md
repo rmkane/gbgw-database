@@ -47,13 +47,13 @@ The API will run on port `8080` and the UI is available on port `8081`.
 ### Server
 
 ```shell script
-http://localhost:8080/api/tutorials
+http://localhost:8080/api/pilots
 ```
 
 ### Client
 
 ```shell script
-http://localhost:8081/tutorials
+http://localhost:8081/pilots
 ```
 
 ## Developer Tips
