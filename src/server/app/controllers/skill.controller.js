@@ -1,5 +1,5 @@
 const db = require('../models');
-const Skill = db.ex_skill;
+const Skill = db.tables.ex_skill;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Skill
@@ -43,16 +43,22 @@ exports.findAll = (req, res) => {
   const name = req.query.name;
   const condition = name ? { name: { [Op.like]: `%${name}%` } } : null;
 
-  Skill.findAll({ where: condition })
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || 'Some error occurred while retrieving skills.'
+  Skill.findAll({
+    where: condition,
+    include: [{
+      model: db.tables.ex_category,
+      as: 'exCategory'
+    }]
+  })
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message:
+              err.message || 'Some error occurred while retrieving skills.'
+        });
       });
-    });
 };
 
 // Find a single Skill with an id

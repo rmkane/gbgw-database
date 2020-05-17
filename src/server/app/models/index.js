@@ -28,7 +28,26 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   }
 });
 
-const db = {};
+// Tables will be dynamically loaded from the model directory.
+const db = {
+  tables : {
+    ai_priority: null,
+    ai_range: null,
+    attribute: null,
+    event: null,
+    ex_category: null,
+    ex_skill: null,
+    job_license: null,
+    part: null,
+    part_type: null,
+    pilot: null,
+    series: null,
+    unit: null,
+    weapon_category: null,
+    weapon_type: null,
+    word_tag: null
+  }
+};
 
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
@@ -37,7 +56,32 @@ db.sequelize = sequelize;
 glob.sync('./app/models/*.model.js').forEach(file => {
   const filename = path.resolve(file);
   const table = path.basename(filename).replace(/\.model\.js/, '');
-  db[table] = require(filename)(sequelize);
+  db.tables[table] = require(filename)(sequelize);
 });
+
+db.tables.unit.hasMany(db.tables.part, {foreignKey: 'unitId'});
+db.tables.series.hasMany(db.tables.pilot, {foreignKey: 'seriesId'});
+db.tables.series.hasMany(db.tables.unit, {foreignKey: 'seriesId'});
+
+db.tables.pilot.belongsTo(db.tables.ai_priority, { as:'aiPriority', foreignKey: 'ai_priority_id'});
+db.tables.pilot.belongsTo(db.tables.ai_range, { as:'aiRange', foreignKey: 'ai_range_id'});
+db.tables.part.belongsTo(db.tables.attribute);
+db.tables.pilot.belongsTo(db.tables.attribute);
+db.tables.unit.belongsTo(db.tables.attribute);
+db.tables.unit.belongsTo(db.tables.attribute);
+db.tables.ex_skill.belongsTo(db.tables.ex_category, { as:'exCategory', foreignKey: 'ex_category_id'});
+db.tables.part.belongsTo(db.tables.ex_skill, { as:'exSkill', foreignKey: 'ex_skill_id'});
+db.tables.pilot.belongsTo(db.tables.job_license, { as:'jobLicense', foreignKey: 'job_license_id'});
+db.tables.part.belongsTo(db.tables.part_type, { as:'partType', foreignKey: 'part_type_id'});
+db.tables.part.belongsTo(db.tables.part_type, { as:'partAugmentType', foreignKey: 'part_augment_type_id'});
+db.tables.pilot.belongsTo(db.tables.series);
+db.tables.unit.belongsTo(db.tables.series);
+db.tables.part.belongsTo(db.tables.unit);
+db.tables.part.belongsTo(db.tables.weapon_category, { as:'weaponCategory', foreignKey: 'weapon_category_id'});
+db.tables.part.belongsTo(db.tables.weapon_type, { as:'weaponType', foreignKey: 'weapon_type_id'});
+db.tables.part.belongsTo(db.tables.word_tag, { as:'wordTag1', foreignKey: 'word_tag_1_id'});
+db.tables.part.belongsTo(db.tables.word_tag, { as:'wordTag2', foreignKey: 'word_tag_2_id'});
+db.tables.pilot.belongsTo(db.tables.word_tag, { as:'wordTag1', foreignKey: 'word_tag_1_id'});
+db.tables.pilot.belongsTo(db.tables.word_tag, { as:'wordTag2', foreignKey: 'word_tag_2_id'});
 
 module.exports = db;

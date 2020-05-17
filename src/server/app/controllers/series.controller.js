@@ -1,5 +1,5 @@
 const db = require('../models');
-const Series = db.series;
+const Series = db.tables.series;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Series

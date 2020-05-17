@@ -1,5 +1,5 @@
 const db = require('../models');
-const Part = db.part;
+const Part = db.tables.part;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Part
@@ -55,16 +55,42 @@ exports.findAll = (req, res) => {
   const name = req.query.name;
   const condition = name ? { name: { [Op.like]: `%${name}%` } } : null;
 
-  Part.findAll({ where: condition })
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || 'Some error occurred while retrieving parts.'
+  Part.findAll({
+    where: condition,
+    include: [{
+      model: db.tables.attribute
+    }, {
+      model: db.tables.ex_skill,
+      as: 'exSkill'
+    }, {
+      model: db.tables.part_type,
+      as: 'partType'
+    }, {
+      model: db.tables.part_type,
+      as: 'partAugmentType'
+    }, {
+      model: db.tables.weapon_type,
+      as: 'weaponType'
+    }, {
+      model: db.tables.weapon_category,
+      as: 'weaponCategory'
+    }, {
+      model: db.tables.word_tag,
+      as: 'wordTag1'
+    }, {
+      model: db.tables.word_tag,
+      as: 'wordTag2'
+    }]
+  })
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message:
+              err.message || 'Some error occurred while retrieving parts.'
+        });
       });
-    });
 };
 
 // Find a single Part with an id

@@ -1,6 +1,6 @@
 const moment = require('moment');
 const db = require('../models');
-const Pilot = db.pilot;
+const Pilot = db.tables.pilot;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Pilot
@@ -57,16 +57,29 @@ exports.findAll = (req, res) => {
   const name = req.query.name;
   const condition = name ? { name: { [Op.like]: `%${name}%` } } : null;
 
-  Pilot.findAll({ where: condition })
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || 'Some error occurred while retrieving pilots.'
+  Pilot.findAll({
+    where: condition,
+    include: [{
+      model: db.tables.attribute
+    }, {
+      model: db.tables.series
+    }, {
+      model: db.tables.word_tag,
+      as: 'wordTag1'
+    }, {
+      model: db.tables.word_tag,
+      as: 'wordTag2'
+    }]
+  })
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message:
+              err.message || 'Some error occurred while retrieving pilots.'
+        });
       });
-    });
 };
 
 // Find a single Pilot with an id

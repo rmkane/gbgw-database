@@ -1,6 +1,6 @@
 const moment = require('moment');
 const db = require('../models');
-const Unit = db.unit;
+const Unit = db.tables.unit;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Unit
@@ -35,7 +35,13 @@ exports.create = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-  Unit.findAll()
+  Unit.findAll({
+    include: [{
+      model: db.tables.part
+    }, {
+      model: db.tables.series
+    }]
+  })
     .then(data => {
       res.send(data);
     })

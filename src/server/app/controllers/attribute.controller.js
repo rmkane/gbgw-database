@@ -1,5 +1,5 @@
 const db = require('../models');
-const Attribute = db.attribute;
+const Attribute = db.tables.attribute;
 
 exports.findAll = (req, res) => {
   Attribute.findAll()
